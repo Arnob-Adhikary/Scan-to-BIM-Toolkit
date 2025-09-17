@@ -10,12 +10,12 @@ This project showcases practical solutions to real-world problems faced in digit
 
 This toolkit includes four primary scripts, each designed to solve a specific problem in the Scan-to-BIM process.
 
-| Script Name       | Description                                                                                              |
-| ----------------- | -------------------------------------------------------------------------------------------------------- |
-| `Point-to-Topo`   | Creates a native Revit topography surface directly from a pre-processed point cloud (`.csv` file).       |
-| `Floor-into-Topo` | Conforms or "projects" a Revit floor element onto an underlying topography surface, ideal for hardscapes.  |
-| `Mass_to_Family`  | Converts any solid geometry from an in-place or conceptual mass into a loadable Generic Model family.     |
-| `Loft Funnel`     | A specialized script to model highly irregular, lofted shapes, developed for a unique project challenge.   |
+| Script Name       | Description                                                                                              | Dependencies                                      |
+| ----------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `Point-to-Topo`   | Creates a native Revit topography surface directly from a pre-processed point cloud (`.csv` file).       | `Genius Loci`, `DynamoIronPython2.7`              |
+| `Floor-into-Topo` | Conforms or "projects" a Revit floor element onto an underlying topography surface, ideal for hardscapes.  | `spring nodes`, `Data-Shapes`, `DynamoIronPython2.7`|
+| `Mass_to_Family`  | Converts any solid geometry from an in-place or conceptual mass into a loadable Generic Model family.     | `spring nodes`, `DynamoIronPython2.7`             |
+| `Loft Funnel`     | A specialized script to model highly irregular, lofted shapes, developed for a unique project challenge.   | `spring nodes`, `DynamoIronPython2.7`             |
 ***
 
 ## 🛠️ Workflows & Usage
@@ -23,9 +23,8 @@ This toolkit includes four primary scripts, each designed to solve a specific pr
 ### General Installation
 
 1.  **Clone Repository:** Download or clone this repository to your local machine.
-2.  **Dynamo Packages:** Ensure you have the necessary Dynamo packages installed. This toolkit may require packages like `Clockwork`, `Spring Nodes`, or `LunchBox`.
+2.  **Install Dynamo Packages:** Before running, open Dynamo and go to `Packages` > `Search for a Package`. Install all the required packages listed in the table above. The `DynamoIronPython2.7` package is essential for scripts using Python 2.
 3.  **Open in Dynamo:** Launch Revit, open a project file, and start Dynamo. Navigate to the script you wish to use.
-### 1. Point-to-Topo
 
 This script requires a significant pre-processing workflow to ensure the input data is clean. It is designed to work with a `.csv` file containing only ground surface points.
 
@@ -53,7 +52,7 @@ This script is useful for modeling hardscapes like roads, plazas, or pathways th
 
 1.  In your Revit project, model a `Floor` element positioned above the target topography. The shape of the floor should represent the hardscape area.
 2.  Open the `Floor-into-Topo.dyn` script.
-3.  Use "Select Model Element" nodes to select the floor and the topography.
+3.  Use "Select Model Element" nodes to select the floor.
 4.  Click "Run". The script will add points to the floor's sub-element editor, matching its shape to the topography below it.
 
 ---
@@ -67,8 +66,8 @@ This script bridges the gap between flexible mass modeling and standard family-b
 1.  Model your complex geometry as a **solid** within a Revit in-place mass or a conceptual mass family (`.rfa`).
 2.  Open the `Mass_to_Family.dyn` script.
 3.  Select the solid mass geometry.
-4.  Provide a name and a save location for the new family file that will be created.
-5.  Click "Run". The script will generate a new Generic Model family (`.rfa`) containing your geometry and load it back into the project.
+4.  Provide a Family Name and Category for the new family file that will be created.
+5.  Click "Run". The script will generate a new Generic Model family instance containing your geometry.
 
 ---
 
